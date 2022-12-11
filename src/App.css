@@ -1,38 +1,239 @@
-.App {
-  text-align: center;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,
+body,
+#root {
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/*  Add accessible line-height */
+body {
+  line-height: 1.5;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Makes images responsive*/
+img {
+  max-width: 100%;
+}
+
+/* Avoid text overflows and insert hyphens on hard-wrap*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Remove built-in form typography styles */
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Flex classes*/
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.d-flex,
+.v-d-flex {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.center,
+.v-center {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.spread,
+.v-spread {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.space-between,
+.v-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.space-between-start,
+.v-space-between-start {
+  display: flex;
+  justify-content: space-between;
+  align-items: self-start;
+}
+
+.end-align-center,
+.v-end-align-center {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.align-center,
+.v-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.align-baseline,
+.v-align-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+.align-stretch,
+.v-align-stretch {
+  display: flex;
+  align-items: stretch;
+}
+
+.justify-center,
+.v-justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+.justify-center-baseline,
+.v-justify-center-baseline {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.justify-start,
+.v-justify-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-start,
+.v-flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.space-around,
+.v-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.space-around-center,
+.v-space-around-center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.center-flex-end,
+.v-center-flex-end {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.center-flex-start,
+.v-center-flex-start {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.space-between-end,
+.v-space-between-end {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.flex-start-center,
+.v-flex-start-center {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-justify-end,
+.v-flex-justify-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flex-end,
+.v-flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-column-reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.align-content-start,
+.v-align-content-start {
+  display: flex;
+  align-content: flex-start;
+}
+
+.v-d-flex,
+.v-center,
+.v-spread,
+.v-space-between,
+.v-space-between-start,
+.v-end-align-center,
+.v-align-center,
+.v-align-baseline,
+.v-align-stretch,
+.v-justify-center,
+.v-justify-center-baseline,
+.v-justify-start,
+.v-flex-start,
+.v-space-around,
+.v-space-around-center,
+.v-center-flex-end,
+.v-center-flex-start,
+.v-space-between-end,
+.v-flex-start-center,
+.v-flex-justify-end,
+.v-flex-end,
+.v-align-content-start {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.full-flex {
+  flex: 1;
+}
+
+.full-flex-grow {
+  flex-grow: 1;
 }
