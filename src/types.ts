@@ -10,4 +10,4 @@ export interface INodeTypeItem {
   nodeIcon: IconType;
 }
 
-export type NodeType = "message" | "test1" | "test2";
+export type NodeType = "message";

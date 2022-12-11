@@ -245,3 +245,8 @@ select {
 .cursor-default {
   cursor: default;
 }
+
+.row-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}

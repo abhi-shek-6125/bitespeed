@@ -8,7 +8,11 @@ export const Wrapper = styled.div`
 export const LeftPanel = styled.div`
   width: 70%;
   height: 100%;
-  padding-bottom: 24px;
+  .react-flow__node.selected {
+    border: 1px solid red !important;
+    box-shadow: none;
+    border-radius: 4px;
+  }
 `;
 
 export const RightPanel = styled.div`

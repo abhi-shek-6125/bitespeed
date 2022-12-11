@@ -1,31 +1,39 @@
+import { useMemo } from "react";
 import ReactFlow, { Controls, Background, BackgroundVariant } from "reactflow";
 import Header from "./components/Header";
 import SettingPanel from "./components/SettingPanel";
 import NodePanel from "./components/NodePanel";
 import CustomMessageNode from "./components/CustomMessageNode";
 import useChatbotFlow from "./helperHooks";
+import { NODE_TYPE_LIST } from "./constants";
 import * as Styles from "./appStyles";
 import "./App.css";
 
 import "reactflow/dist/style.css";
-import { useMemo } from "react";
-import { NODE_TYPE_LIST } from "./constants";
 
 const App = () => {
+  // custom hook to manage various event handlers and states at one place
   const {
     nodeList,
     onNodesChange,
     edgeList,
     onEdgesChange,
     selectedNode,
+    savePossible,
     onConnect,
+    addNewNodeOnDrop,
+    onNodeSelection,
+    onCanvasClick,
+    onUpdateSettings,
+    onSaveFlow,
   } = useChatbotFlow();
 
-  const nodeTypes = useMemo(() => ({ messageNode: CustomMessageNode }), []);
+  // object having various custom node components
+  const nodeTypes = useMemo(() => ({ message: CustomMessageNode }), []);
 
   return (
     <Styles.Wrapper className="v-d-flex">
-      <Header onClickSave={() => {}} />
+      <Header onClickSave={onSaveFlow} canSave={savePossible} />
       <div className="d-flex full-flex">
         <Styles.LeftPanel>
           <ReactFlow
@@ -35,17 +43,25 @@ const App = () => {
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             nodeTypes={nodeTypes}
+            onNodeClick={onNodeSelection}
+            onPaneClick={onCanvasClick}
             fitView
           >
             <Background variant={BackgroundVariant.Cross} />
             <Controls />
           </ReactFlow>
         </Styles.LeftPanel>
-        <Styles.RightPanel>
+        <Styles.RightPanel id="node-panel">
           {selectedNode ? (
-            <SettingPanel selectedNodeData={null} />
+            <SettingPanel
+              selectedNodeData={selectedNode}
+              onUpdateNodeSetting={onUpdateSettings}
+            />
           ) : (
-            <NodePanel nodeTypeList={NODE_TYPE_LIST} />
+            <NodePanel
+              onNodeItemDrop={addNewNodeOnDrop}
+              nodeTypeList={NODE_TYPE_LIST}
+            />
           )}
         </Styles.RightPanel>
       </div>

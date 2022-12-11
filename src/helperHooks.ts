@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Node,
   Edge,
@@ -9,14 +9,28 @@ import {
   Connection,
   addEdge,
 } from "reactflow";
+import { DraggableData } from "react-draggable";
+import { v4 as uuidv4 } from "uuid";
+import { NodeType } from "./types";
 
 function useChatbotFlow() {
-  const [selectedNode, setSelectedNode] = useState(null);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [nodeList, setNodeList] = useState<Array<Node>>([]);
   const [edgeList, setEdgeList] = useState<Array<Edge>>([]);
+  const [savePossible, setSavePossibility] = useState(true);
+
+  const addNewNodeOnDrop = (data: DraggableData, nodeType: NodeType) => {
+    const nodeId = uuidv4();
+    const newNodeData = {
+      id: nodeId,
+      type: nodeType,
+      data: { label: "" },
+      position: { x: data.x, y: data.y },
+    };
+    setNodeList((nds) => [...nds, newNodeData]);
+  };
 
   const onNodesChange = useCallback((changes: Array<NodeChange>) => {
-    console.log(changes);
     return setNodeList((nds) => applyNodeChanges(changes, nds));
   }, []);
 
@@ -27,11 +41,73 @@ function useChatbotFlow() {
   );
 
   const onConnect = useCallback(
-    (connection: Connection) => setEdgeList((eds) => addEdge(connection, eds)),
+    (connection: Connection) => {
+      return setEdgeList((eds) => {
+        // checking if the source is already a source in existing edges
+        const isAlreadySource =
+          eds.filter((item) => {
+            if (item.source === connection.source) {
+              return true;
+            }
+            return false;
+          }).length === 1;
+        if (isAlreadySource) {
+          return eds;
+        }
+        return addEdge(connection, eds);
+      });
+    },
     [setEdgeList]
   );
 
+  const onNodeSelection = (event: React.MouseEvent, node: Node) => {
+    setSelectedNode(node);
+  };
+
+  const onCanvasClick = (event: React.MouseEvent) => {
+    setSelectedNode(null);
+  };
+
+  const onUpdateSettings = (text: string, nodeId: string) => {
+    const updatedList = nodeList.map((nodeItem) => {
+      if (nodeItem.id === nodeId) {
+        return {
+          ...nodeItem,
+          data: { label: text },
+        };
+      }
+      return nodeItem;
+    });
+    setNodeList(updatedList);
+  };
+
+  const onSaveFlow = () => {
+    if (nodeList.length > 0 && edgeList.length === 0) {
+      setSavePossibility(false);
+      return;
+    }
+    let canSave = true;
+    nodeList.forEach((item) => {
+      let hasEmptyTargetHandle = true;
+      edgeList.forEach((edge) => {
+        if (edge.target === item.id) {
+          hasEmptyTargetHandle = false;
+        }
+      });
+      if (hasEmptyTargetHandle) {
+        canSave = false;
+      }
+    });
+
+    if (canSave) {
+      setSavePossibility(true);
+    } else {
+      setSavePossibility(false);
+    }
+  };
+
   return {
+    savePossible,
     selectedNode,
     setSelectedNode,
     nodeList,
@@ -39,6 +115,11 @@ function useChatbotFlow() {
     edgeList,
     onEdgesChange,
     onConnect,
+    addNewNodeOnDrop,
+    onNodeSelection,
+    onCanvasClick,
+    onUpdateSettings,
+    onSaveFlow,
   };
 }
 
