@@ -237,3 +237,11 @@ select {
 .full-flex-grow {
   flex-grow: 1;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-default {
+  cursor: default;
+}
