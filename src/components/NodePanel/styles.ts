@@ -12,5 +12,6 @@ export const NodePanelItem = styled.div`
   border-radius: 4px;
   padding: 16px 24px;
   width: 60%;
+  min-width: fit-content;
   background-color: white;
 `;
