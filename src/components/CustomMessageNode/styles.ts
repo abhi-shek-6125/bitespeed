@@ -15,9 +15,9 @@ export const Header = styled.div`
 `;
 
 export const Content = styled.div`
-  font-size: 14px;
-  line-height: 17px;
-  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
   background-color: white;
   padding: 4px;
   box-shadow: 5px 5px 5px gray;
@@ -29,4 +29,13 @@ export const Title = styled.div`
   font-size: 14px;
   line-height: 17px;
   padding: 4px 8px;
+  font-weight: 500;
+`;
+
+export const WhatsAppIconWrapper = styled.div`
+  background-color: white;
+  height: 21px;
+  width: 21px;
+  border-radius: 50%;
+  margin-right: 8px;
 `;

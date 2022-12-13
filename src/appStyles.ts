@@ -10,7 +10,7 @@ export const LeftPanel = styled.div`
   height: 100%;
   .react-flow__node.selected {
     border: 1px solid red !important;
-    box-shadow: none;
+    box-shadow: none !important;
     border-radius: 4px;
   }
 `;

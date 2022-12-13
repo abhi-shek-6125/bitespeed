@@ -29,6 +29,7 @@ const Header = ({ onClickSave, onSaveMessage }: IHeaderProps) => {
         onClick={(event) => {
           onClickSave(event);
         }}
+        className="cursor-pointer"
       >
         Save Changes
       </button>

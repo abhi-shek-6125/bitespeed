@@ -6,7 +6,9 @@ export const Wrapper = styled.div`
   background-color: #e8eaef;
   button {
     padding: 4px 8px;
-    border: 1px solid blue;
+    border: 1px solid #009eff;
     border-radius: 4px;
+    color: #009eff;
+    background-color: white;
   }
 `;

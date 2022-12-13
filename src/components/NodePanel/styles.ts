@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
 
 export const NodePanelItem = styled.div`
   border: 1px solid #009eff;
+  color: #009eff;
   border-radius: 4px;
   padding: 16px 24px;
   width: 60%;

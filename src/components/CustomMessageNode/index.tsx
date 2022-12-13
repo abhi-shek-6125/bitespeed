@@ -17,7 +17,9 @@ const MessageNode = ({ data }: IMessageNodeProps) => {
           <BiMessageRoundedDetail />
           Send Message
         </Styles.Title>
-        <RiWhatsappFill />
+        <Styles.WhatsAppIconWrapper className="center">
+          <RiWhatsappFill size="0.8em" />
+        </Styles.WhatsAppIconWrapper>
       </Styles.Header>
       <Styles.Content>{data?.label}</Styles.Content>
       <Handle type="source" position={Position.Right} />
