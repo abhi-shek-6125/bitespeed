@@ -17,7 +17,10 @@ function useChatbotFlow() {
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [nodeList, setNodeList] = useState<Array<Node>>([]);
   const [edgeList, setEdgeList] = useState<Array<Edge>>([]);
-  const [savePossible, setSavePossibility] = useState(true);
+  const [onSaveMessage, setOnSaveMessage] = useState({
+    text: "",
+    isError: false,
+  });
 
   const addNewNodeOnDrop = (data: DraggableData, nodeType: NodeType) => {
     const nodeId = uuidv4();
@@ -83,7 +86,7 @@ function useChatbotFlow() {
 
   const onSaveFlow = () => {
     if (nodeList.length > 0 && edgeList.length === 0) {
-      setSavePossibility(false);
+      setOnSaveMessage({ text: "Can not save", isError: true });
       return;
     }
     let canSave = true;
@@ -100,14 +103,13 @@ function useChatbotFlow() {
     });
 
     if (canSave) {
-      setSavePossibility(true);
+      setOnSaveMessage({ text: "Saved", isError: false });
     } else {
-      setSavePossibility(false);
+      setOnSaveMessage({ text: "Can not save", isError: true });
     }
   };
 
   return {
-    savePossible,
     selectedNode,
     setSelectedNode,
     nodeList,
@@ -120,6 +122,7 @@ function useChatbotFlow() {
     onCanvasClick,
     onUpdateSettings,
     onSaveFlow,
+    onSaveMessage,
   };
 }
 

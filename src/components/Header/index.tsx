@@ -3,21 +3,24 @@ import * as Styles from "./styles";
 
 interface IHeaderProps {
   onClickSave(event: React.MouseEvent): void;
-  canSave: boolean;
+  onSaveMessage: { text: string; isError: boolean };
 }
 
-const Header = ({ onClickSave, canSave }: IHeaderProps) => {
+const Header = ({ onClickSave, onSaveMessage }: IHeaderProps) => {
   const [headerText, setHeaderText] = useState({ message: "", color: "" });
 
   useEffect(() => {
-    const headerObject = canSave
-      ? { message: "Saved", color: "#43c78f" }
-      : { message: "Can not Save", color: "#fb8890" };
+    const headerObject = onSaveMessage.text
+      ? {
+          message: onSaveMessage.text,
+          color: onSaveMessage.isError ? "#fb8890" : "#43c78f",
+        }
+      : { message: "", color: "" };
     setHeaderText(headerObject);
     setTimeout(() => {
       setHeaderText({ message: "", color: "" });
     }, 2000);
-  }, [canSave]);
+  }, [onSaveMessage]);
 
   return (
     <Styles.Wrapper className="row-reverse">

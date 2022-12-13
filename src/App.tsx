@@ -19,13 +19,13 @@ const App = () => {
     edgeList,
     onEdgesChange,
     selectedNode,
-    savePossible,
     onConnect,
     addNewNodeOnDrop,
     onNodeSelection,
     onCanvasClick,
     onUpdateSettings,
     onSaveFlow,
+    onSaveMessage,
   } = useChatbotFlow();
 
   // object having various custom node components
@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <Styles.Wrapper className="v-d-flex">
-      <Header onClickSave={onSaveFlow} canSave={savePossible} />
+      <Header onClickSave={onSaveFlow} onSaveMessage={onSaveMessage} />
       <div className="d-flex full-flex">
         <Styles.LeftPanel>
           <ReactFlow
